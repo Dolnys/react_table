@@ -1,6 +1,6 @@
 import './App.css'
-import './components/table'
-import Table from './components/table'
+import './components/book_table'
+import Table from './components/book_table'
 
 function App() {
   return (
