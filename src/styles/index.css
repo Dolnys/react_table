@@ -1,0 +1,5 @@
+.selected {
+  background-color: rgb(98, 158, 243);
+  font-weight: bold;
+  text-transform: uppercase;
+}

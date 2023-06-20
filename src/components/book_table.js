@@ -3,6 +3,7 @@ import { searchBooks } from '../services/api'
 
 const BookTable = () => {
   const [books, setBooks] = useState([])
+  const [selectedRow, setSelectedRow] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -19,6 +20,10 @@ const BookTable = () => {
     fetchBooks()
   }, [])
 
+  const handleRowClick = (bookId) => {
+    setSelectedRow(bookId)
+  }
+
   return (
     <div>
       {loading ? (
@@ -34,7 +39,11 @@ const BookTable = () => {
           </thead>
           <tbody>
             {books.map((book) => (
-              <tr key={book.id}>
+              <tr
+                key={book.id}
+                onClick={() => handleRowClick(book.id)}
+                className={selectedRow === book.id ? 'selected' : ''}
+              >
                 <td>{book.volumeInfo.title}</td>
                 <td>
                   {book.volumeInfo.authors &&
