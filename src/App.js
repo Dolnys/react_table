@@ -1,11 +1,9 @@
 import './App.css'
-import './components/book_table'
-import Table from './components/book_table'
-
+import BookTable from './components/book_table'
 function App() {
   return (
     <div className="App">
-      <Table />
+      <BookTable />
     </div>
   )
 }

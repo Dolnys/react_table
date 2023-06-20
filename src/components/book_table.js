@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { searchBooks } from '../services/api'
+import BookDetails from './book_details'
 
 const BookTable = () => {
   const [books, setBooks] = useState([])
@@ -9,7 +10,7 @@ const BookTable = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await searchBooks('maritime', 20)
+        const response = await searchBooks('maritime', 15)
         setBooks(response.data.items)
         setLoading(false)
       } catch (error) {
@@ -58,6 +59,7 @@ const BookTable = () => {
           </tbody>
         </table>
       )}
+      <BookDetails selectedRow={selectedRow} />
     </div>
   )
 }
