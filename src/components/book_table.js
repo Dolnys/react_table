@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { searchBooks, searchBooksByAuthor } from '../services/api'
+import { useNavigate } from 'react-router-dom'
+import { searchBooks } from '../services/api'
 import BookDetails from './book_details'
 import AuthorBooks from './author_books'
 
