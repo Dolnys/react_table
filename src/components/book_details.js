@@ -15,6 +15,12 @@ const BookDetails = ({ selectedRow }) => {
       }
     }
 
+    if (selectedRow) {
+      fetchBookDetails()
+    }
+  }, [selectedRow])
+
+  useEffect(() => {
     const fetchOtherBooks = async () => {
       try {
         if (bookDetails && bookDetails.authors) {
@@ -28,11 +34,8 @@ const BookDetails = ({ selectedRow }) => {
       }
     }
 
-    if (selectedRow) {
-      fetchBookDetails()
-      fetchOtherBooks() // Call fetchOtherBooks when selectedRow changes
-    }
-  }, [selectedRow, bookDetails])
+    fetchOtherBooks()
+  }, [bookDetails])
 
   if (!selectedRow) {
     return <p>Please select a book to view details.</p>

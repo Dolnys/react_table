@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const API_KEY = 'AIzaSyBjeobAKgQNXTfBZXhlMYQFd8kna5rR6Mw'
-const API_KEY = 'AIzaSyBnS_SqMGtyIFjA6EEwypUyz89EotffC5M'
+const API_KEY = 'AIzaSyDHX2Dxb1UDJxfwaL4aZdKWostpx_nhpbE'
+
 const instance = axios.create({
   baseURL: 'https://www.googleapis.com/books/v1',
   params: {
@@ -17,4 +17,10 @@ export const searchBooks = (query, maxResults) => {
 
 export const getBookDetails = (bookId) => {
   return instance.get(`/volumes/${bookId}`)
+}
+
+export const searchBooksByAuthor = (author, maxResults) => {
+  return instance.get('/volumes', {
+    params: { q: `inauthor:${author}`, maxResults: maxResults },
+  })
 }
