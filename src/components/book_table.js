@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { searchBooks, searchBooksByAuthor } from '../services/api'
 import BookDetails from './book_details'
 import AuthorBooks from './author_books'
@@ -9,6 +10,7 @@ const BookTable = () => {
   const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (searchTerm !== '') {
@@ -27,10 +29,6 @@ const BookTable = () => {
       setBooks(authors)
       setLoading(false)
       setSearchQuery(searchTerm)
-
-      const authorResponse = await searchBooksByAuthor(searchTerm, 5)
-      const authorBooks = authorResponse.data.items
-      console.log('Author Books:', authorBooks)
     } catch (error) {
       console.log('An error occurred while fetching data:', error)
       setLoading(false)
@@ -45,6 +43,10 @@ const BookTable = () => {
     if (event.key === 'Enter') {
       handleSearch()
     }
+  }
+
+  const handleAuthorClick = (author) => {
+    navigate(`/authors/${author}`)
   }
 
   return (
@@ -69,7 +71,7 @@ const BookTable = () => {
             {[...new Set(books)].map((author, index) => (
               <li
                 key={index}
-                onClick={() => handleRowClick(index)}
+                onClick={() => handleAuthorClick(author)}
                 className={selectedRow === index ? 'selected' : ''}
               >
                 {author}

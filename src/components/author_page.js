@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { searchBooksByAuthor } from '../services/api'
 
 const AuthorPage = () => {
@@ -29,6 +29,9 @@ const AuthorPage = () => {
 
   return (
     <div>
+      <nav>
+        <Link to="/">Main Page</Link> {'>'} {author}
+      </nav>
       <h3>Author Books:</h3>
       {books.length > 0 ? (
         <ul>
