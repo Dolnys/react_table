@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<BookTable />} />
           <Route path="/authors/:author" element={<AuthorPage />} />
-          <Route path="/books/:id" component={BookDetails} />
+          <Route path="/books/:id" element={<BookDetails />} />
         </Routes>
       </div>
     </BrowserRouter>

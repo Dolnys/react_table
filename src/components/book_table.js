@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { searchBooks } from '../services/api'
 import BookDetails from './book_details'
 import AuthorBooks from './author_books'
+import googleBooksLogo from '../assets/images/google_books.png'
 
 const BookTable = () => {
   const [books, setBooks] = useState([])
@@ -10,6 +11,7 @@ const BookTable = () => {
   const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+  const [showMessage, setShowMessage] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -29,6 +31,7 @@ const BookTable = () => {
       setBooks(authors)
       setLoading(false)
       setSearchQuery(searchTerm)
+      setShowMessage(true) // Pokazuj komunikat po wyszukaniu
     } catch (error) {
       console.log('An error occurred while fetching data:', error)
       setLoading(false)
@@ -50,45 +53,50 @@ const BookTable = () => {
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search"
-        value={searchTerm}
-        onChange={(event) => setSearchTerm(event.target.value)}
-        onKeyPress={handleKeyPress}
-      />
-      <button onClick={handleSearch}>Szukaj</button>
+    <div className="container mt-5">
+      <div className="d-flex justify-content-center align-items-center mb-3">
+        <img
+          className="img-fluid"
+          src={googleBooksLogo}
+          alt="google books api logo"
+        />
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-6">
+          <input
+            type="text"
+            className="form-control mb-3"
+            placeholder="Enter the author Name"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          <button className="btn btn-primary mb-3" onClick={handleSearch}>
+            Search
+          </button>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <p style={{ textAlign: 'center' }}>
-            Results for the search query: {searchQuery}
-          </p>
-          <ul>
-            {[...new Set(books)].map((author, index) => (
-              <li
-                key={index}
-                onClick={() => handleAuthorClick(author)}
-                className={selectedRow === index ? 'selected' : ''}
-              >
-                {author}
-              </li>
-            ))}
-          </ul>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div>
+              <p className="text-center">
+                Results for the search query: {searchQuery}
+              </p>
+              <ul className="list-group">
+                {[...new Set(books)].map((author, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleAuthorClick(author)}
+                    className="list-group-item mb-1"
+                  >
+                    {author}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-      )}
-
-      {selectedRow !== null && (
-        <div>
-          <h3>Selected Author: {books[selectedRow]}</h3>
-          <AuthorBooks author={books[selectedRow]} />
-        </div>
-      )}
-
-      <BookDetails selectedRow={selectedRow} />
+      </div>
     </div>
   )
 }

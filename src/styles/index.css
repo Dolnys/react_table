@@ -2,3 +2,18 @@
   background-color: rgb(98, 158, 243);
   font-weight: bold;
 }
+
+.list-group-item {
+  transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: #007bff;
+  color: #ededed;
+  cursor: pointer;
+}
+
+.custom-link {
+  text-decoration: none;
+  color: #007bff;
+}

@@ -15,7 +15,7 @@ const BookDetails = ({ selectedBookId }) => {
       }
     }
 
-    if (selectedBookId) {
+    if (selectedBookId !== null) {
       fetchBookDetails()
     }
   }, [selectedBookId])
@@ -37,11 +37,11 @@ const BookDetails = ({ selectedBookId }) => {
     fetchOtherBooks()
   }, [bookDetails])
 
-  if (!selectedBookId) {
-    return <p>Please select a book to view details.</p>
+  if (selectedBookId === null) {
+    return null
   }
 
-  if (!bookDetails) {
+  if (bookDetails === null) {
     return <p>Loading book details...</p>
   }
 

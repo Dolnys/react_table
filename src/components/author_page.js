@@ -35,14 +35,18 @@ const AuthorPage = () => {
 
   return (
     <div>
-      <nav>
-        <Link to="/">Main Page</Link> {'>'} {author}
+      <nav className="breadcrumb">
+        <Link className="breadcrumb-item custom-link" to="/">
+          Main Page
+        </Link>
+        <span className="breadcrumb-item active">{author}</span>
       </nav>
       <h3>Author Books:</h3>
       {books.length > 0 ? (
-        <table>
+        <table className="table">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Title</th>
               <th>Category</th>
               <th>Published Date</th>
@@ -51,12 +55,13 @@ const AuthorPage = () => {
             </tr>
           </thead>
           <tbody>
-            {books.map((book) => (
+            {books.map((book, index) => (
               <tr
                 key={book.id}
                 onClick={() => handleRowClick(book.id)}
                 className={selectedBookId === book.id ? 'selected' : ''}
               >
+                <td>{index + 1}</td>
                 <td>
                   <Link to={`/books/${book.id}`}>{book.volumeInfo.title}</Link>
                 </td>
