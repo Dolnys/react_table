@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { searchBooks } from '../services/api'
-import BookDetails from './book_details'
-import AuthorBooks from './author_books'
 import googleBooksLogo from '../assets/images/google_books.png'
 
 const BookTable = () => {

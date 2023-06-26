@@ -13,7 +13,7 @@ const AuthorPage = () => {
     const fetchBooksByAuthor = async () => {
       try {
         setLoading(true)
-        const response = await searchBooksByAuthor(author, 5)
+        const response = await searchBooksByAuthor(author, 12)
         setBooks(response.data.items)
         setLoading(false)
       } catch (error) {
